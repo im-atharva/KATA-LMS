@@ -46,4 +46,29 @@ describe("Library Management System", () => {
     library.borrowBook("12345");
     expect(() => library.borrowBook("12345")).toThrow("Book is not Available!");
   });
+
+  // test to borrow book
+  test("should allow returning borrowed books", () => {
+    library.addBook({
+      isbn: "12345",
+      title: "Atomic Habits",
+      author: "James Clear",
+      year: 2002,
+    });
+    library.borrowBook("12345");
+    library.returnBook("12345");
+    expect(library.getAvailableBooks().length).toBe(1);
+    expect(library.getAvailableBooks()[0].isbn).toBe("12345");
+  });
+
+  test("should throw an error if trying to return a book that was not borrowed", () => {
+    library.addBook({
+      isbn: "12345",
+      title: "Atomic Habits",
+      author: "James Clear",
+      year: 2002,
+    });
+
+    expect(() => library.returnBook("12345")).toThrow("Book not borrowed");
+  });
 });

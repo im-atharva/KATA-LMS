@@ -18,6 +18,13 @@ class Library {
     if (!book) throw new Error("Book is not Available!");
     book.available = false;
   }
+
+  //function to return borrowed books
+  returnBook(isbn) {
+    const book = this.books.find((b) => b.isbn === isbn && !b.available);
+    if (!book) throw new Error("Book not borrowed");
+    book.available = true;
+  }
 }
 
 module.exports = Library;
