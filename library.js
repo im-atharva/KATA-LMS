@@ -9,7 +9,11 @@ class Library {
 
   // function to get all available books
   getAvailableBooks() {
-    return this.books.filter((book) => book.available);
+    const bookList = this.books.filter((book) => book.available);
+    if (bookList.length === 0) {
+      return "No Books are currently Available";
+    }
+    return bookList;
   }
 
   // function to borrow books

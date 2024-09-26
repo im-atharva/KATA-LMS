@@ -32,7 +32,9 @@ describe("Library Management System", () => {
       year: 1925,
     });
     library.borrowBook("100703");
-    expect(library.getAvailableBooks().length).toBe(0);
+    expect(library.getAvailableBooks()).toBe(
+      "No Books are currently Available"
+    );
   });
 
   test("should throw an error if the book is not available", () => {
@@ -70,5 +72,33 @@ describe("Library Management System", () => {
     });
 
     expect(() => library.returnBook("12345")).toThrow("Book not borrowed");
+  });
+
+  //view available books
+  test("should list all the available books", () => {
+    library.addBook({
+      isbn: "12345",
+      title: "Atomic Habits",
+      author: "James Clear",
+      year: 2002,
+    });
+
+    library.addBook({
+      isbn: "100703",
+      title: "The Daily Stoic",
+      author: "Ryan Holiday",
+      year: 1925,
+    });
+
+    expect(library.getAvailableBooks().length).toBe(2);
+    expect(library.getAvailableBooks()[0].title).toBe("Atomic Habits");
+    expect(library.getAvailableBooks()[1].title).toBe("The Daily Stoic");
+  });
+
+  //if there are no available books
+  test("should return a message if no books are available", () => {
+    expect(library.getAvailableBooks()).toBe(
+      "No Books are currently Available"
+    );
   });
 });
