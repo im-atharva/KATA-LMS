@@ -25,7 +25,7 @@ You will also need **npm** (which comes with Node.js) and **Jest** for running t
    ```
 2. Navigate to the Project Directory:
    ```bash
-   cd library-management-system
+   cd KATA-LMS
    ```
 3. Install the dependencies
    ```
