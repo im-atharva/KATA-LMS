@@ -22,4 +22,28 @@ describe("Library Management System", () => {
     expect(library.getAvailableBooks()[0].title).toBe("The Daily Stoic");
     expect(library.getAvailableBooks()[0].author).toBe("Ryan Holiday");
   });
+
+  //test to borrow books
+  test("should allow borrowing a available book", () => {
+    library.addBook({
+      isbn: "100703",
+      title: "The Daily Stoic",
+      author: "Ryan Holiday",
+      year: 1925,
+    });
+    library.borrowBook("100703");
+    expect(library.getAvailableBooks().length).toBe(0);
+  });
+
+  test("should throw an error if the book is not available", () => {
+    library.addBook({
+      isbn: "12345",
+      title: "Atomic Habits",
+      author: "James Clear",
+      year: 2002,
+      available: false, //must throw the error
+    });
+    library.borrowBook("12345");
+    expect(() => library.borrowBook("12345")).toThrow("Book is not Available!");
+  });
 });
