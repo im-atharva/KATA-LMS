@@ -29,6 +29,12 @@ class Library {
     if (!book) throw new Error("Book not borrowed");
     book.available = true;
   }
+
+  getBook(title) {
+    const book = this.books.find((b) => b.title === title && b.available);
+    if (!book) throw new Error("Book not available");
+    return book.title;
+  }
 }
 
 module.exports = Library;

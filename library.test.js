@@ -101,4 +101,44 @@ describe("Library Management System", () => {
       "No Books are currently Available"
     );
   });
+
+  //specific book
+  test("should return a given book if available", () => {
+    library.addBook({
+      isbn: "100703",
+      title: "The Daily Stoic",
+      author: "Ryan Holiday",
+      year: 1925,
+    });
+
+    library.addBook({
+      isbn: "100704",
+      title: "abc",
+      author: "Ryan xyz",
+      year: 1925,
+    });
+
+    expect(library.getAvailableBooks().length).toBe(2);
+    expect(library.getBook("abc")).toBe("abc");
+  });
+
+  //
+  test("if specific book not available", () => {
+    library.addBook({
+      isbn: "100703",
+      title: "The Daily Stoic",
+      author: "Ryan Holiday",
+      year: 1925,
+    });
+
+    library.addBook({
+      isbn: "100704",
+      title: "abc",
+      author: "Ryan xyz",
+      year: 1925,
+    });
+    library.borrowBook("100704");
+    expect(library.getAvailableBooks().length).toBe(1);
+    expect(library.getBook("abc")).toBe("Book not available");
+  });
 });
